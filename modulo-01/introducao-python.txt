@@ -1,0 +1,47 @@
+Origem do Python
+- Criado por Guido van Rossum em 1991
+- Baseado na linguagem ABC
+- Nome inspirado no grupo Monty Python
+- Proposta: simplicidade e legibilidade
+
+Objetivos da linguagem
+- Código fácil de ler e escrever
+- Alta produtividade
+- Uso geral (não restrito a uma área)
+- Integração com outras linguagens
+- Comunidade ativa e muitas bibliotecas
+
+Onde usar Python
+- Ciência de dados e inteligência artificial
+- Desenvolvimento web (Django, Flask, FastAPI)
+- Automação de tarefas e scripts
+- Aplicações desktop
+- Desenvolvimento de jogos
+- Sistemas embarcados e IoT
+- Ensino de programação
+
+---------------------------------------------------------------------
+
+Instalação do Python
+- Acessar o site oficial: https://www.python.org/downloads/
+- Baixar a versão estável mais recente (recomendada)
+- Executar o instalador
+- Marcar a opção "Add Python to PATH"
+- Clicar em "Install Now"
+- Verificar a instalação no terminal/cmd: python --version
+
+Instalação do VS Code
+- Acessar o site oficial: https://code.visualstudio.com/
+- Baixar a versão para o seu sistema operacional
+- Executar o instalador e seguir as etapas padrão
+- Abrir o VS Code após a instalação
+
+Configuração inicial do VS Code para Python
+- Abrir o VS Code
+- Ir em "Extensões" (ícone quadrado na barra lateral)
+- Pesquisar por "Python" e instalar a extensão oficial da Microsoft
+- Opcional: instalar também "Pylance" e "Jupyter"
+- Criar um arquivo .py e testar executando código simples
+
+-----------------------------------------------------------------
+
