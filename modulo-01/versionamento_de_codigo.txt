@@ -1,0 +1,68 @@
+# Versionamento de Código
+
+- É a prática de controlar alterações no código ao longo do tempo.
+- Permite voltar a versões anteriores, colaborar em equipe e organizar o desenvolvimento.
+
+# Git e GitHub
+
+GIT:
+- Sistema de controle de versão distribuído.
+- Funciona localmente no seu computador.
+- Principais conceitos:
+  - Commit: "salvar" alterações no histórico.
+  - Branch: ramificação do projeto (ex.: main, dev).
+  - Merge: juntar alterações de uma branch em outra.
+  - Pull: atualizar seu repositório local com mudanças do remoto.
+  - Push: enviar alterações locais para o repositório remoto.
+  - Stage (git add): preparar arquivos para o próximo commit.
+
+GITHUB:
+- Plataforma online que hospeda repositórios Git.
+- Permite colaboração, controle remoto e backup do código.
+
+# Principais comandos Git/GitHub
+
+1. Criar repositório remoto:
+   - No GitHub: botão "New repository"
+   - Escolher nome, descrição, visibilidade (public/private)
+
+2. Clonar repositório remoto para local:
+   git clone <URL_DO_REPOSITORIO>
+
+3. Verificar repositórios remotos:
+   git remote -v
+
+4. Adicionar arquivos para commit:
+   git add <arquivo>   # específico
+   git add .           # todos os arquivos
+
+5. Criar commit (salvar alterações localmente):
+   git commit -m "mensagem do commit"
+
+6. Enviar alterações para o remoto:
+   git push origin <branch>
+
+7. Atualizar repositório local com remoto:
+   git pull origin <branch>
+
+8. Criar nova branch:
+   git branch <nome_branch>
+
+9. Mudar para outra branch:
+   git checkout <nome_branch>
+   ou
+   git switch <nome_branch>
+
+10. Mesclar branch:
+    git merge <branch>
+
+11. Ver status do repositório:
+    git status
+
+12. Histórico de commits:
+    git log
+
+# Observações
+- Sempre escrever mensagens de commit claras e curtas.
+- Manter repositórios organizados ajuda a colaborar em equipe.
+- GitHub permite pull requests, issues e integração com CI/CD.
