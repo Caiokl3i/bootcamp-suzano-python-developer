@@ -41,10 +41,10 @@ def mostrar_menu():
         
         return option
 
-def verificar_deposito():
+def realizar_deposito():
     while True:
         try:
-            valor_deposito = int(input('Digite o valor do depósito: '))
+            valor_deposito = float(input('Digite o valor do depósito: '))
         except ValueError:
             print("Isso não é um número válido!")
             continue
@@ -53,8 +53,10 @@ def verificar_deposito():
             print('Número inválido para depósito!')
             continue
         
-        return valor_deposito
-
+        carteira += valor_deposito
+        depositos_esxtrato.append(valor_deposito)
+        
+        return print(f'Deposito de R${valor_deposito:.2f} foi realizado com sucesso \n Carteira: R${carteira}')
 
 carteira = 0
 depositos_esxtrato = []
