@@ -21,7 +21,7 @@ Projeto: Sistema Bancário (Versão 1)
     - Os valores devem ser exibidos no formato R$ xxx.xx, exemplo: 1500.45 = R$ 1500.45.
 '''
 
-def menu():
+def mostrar_menu():
     while True:
         print("\n============ SISTEMA BANCÁRIO ============")
         print("1 - Depositar")
@@ -40,4 +40,25 @@ def menu():
             continue
         
         return option
+
+def verificar_deposito():
+    while True:
+        try:
+            valor_deposito = int(input('Digite o valor do depósito: '))
+        except ValueError:
+            print("Isso não é um número válido!")
+            continue
+
+        if valor_deposito < 0:
+            print('Número inválido para depósito!')
+            continue
+        
+        return valor_deposito
+
+
+carteira = 0
+depositos_esxtrato = []
+limite_saques = 3
+saques_extrato = []
+
 
