@@ -58,9 +58,39 @@ def realizar_deposito():
         
         return print(f'Deposito de R${valor_deposito:.2f} foi realizado com sucesso \n Carteira: R${carteira}')
 
-carteira = 0
+def realizar_saque():
+    while True:
+        
+        if saque_diario > limite_saques:
+            return print('Limite de saques diários atingidos!')
+        
+        try:
+            valor_saque = float('Digite o valor do saque (Limite max.: R$500,00): ')
+        except ValueError:
+            print("Isso não é um número válido!")
+            continue
+        
+        if valor_saque < 0:
+            print('Valor inválido!')
+            continue
+        elif valor_saque > carteira:
+            print('Saldo insuficiente!')
+            return
+        elif valor_saque > 500:
+            print('Limite máximo por saque: R$500,00')
+            continue
+        
+        carteira -= valor_saque
+        saques_extrato.append(valor_saque)
+        
+        return print(f'Saque de R${valor_saque:.2f} foi realizado com sucesso \n Carteira: R${carteira}') 
+
+
 depositos_esxtrato = []
-limite_saques = 3
 saques_extrato = []
+carteira = 0
+limite_saques = 3
+saque_diario = 0
+
 
 
