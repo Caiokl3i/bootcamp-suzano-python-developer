@@ -54,9 +54,9 @@ def realizar_deposito():
             continue
         
         carteira += valor_deposito
-        depositos_esxtrato.append(valor_deposito)
+        depositos_extrato.append(valor_deposito)
         
-        return print(f'Deposito de R${valor_deposito:.2f} foi realizado com sucesso \n Carteira: R${carteira}')
+        return print(f'Deposito de R${valor_deposito:.2f} foi realizado com sucesso \n Carteira: R${carteira:.2f}')
 
 def realizar_saque():
     while True:
@@ -83,14 +83,24 @@ def realizar_saque():
         carteira -= valor_saque
         saques_extrato.append(valor_saque)
         
-        return print(f'Saque de R${valor_saque:.2f} foi realizado com sucesso \n Carteira: R${carteira}') 
+        return print(f'Saque de R${valor_saque:.2f} foi realizado com sucesso \n Carteira: R${carteira:.2f}') 
 
+def consultar_extrato():
+    print('=============== EXTRATO ===============')
+    
+    for i, deposito in enumerate(depositos_extrato):
+        print(f'{i+1}. Deposito {i+1}: R${deposito:.2f}')
+    
+    print()
+    for i, saque in enumerate(saques_extrato):
+        print(f'{i+1}. Saque {i+1}: R${saque:.2f}')
 
-depositos_esxtrato = []
+    print()
+    print(f'Saldo atual: R${carteira:.2f}')
+
+depositos_extrato = []
 saques_extrato = []
 carteira = 0
 limite_saques = 3
 saque_diario = 0
-
-
 
