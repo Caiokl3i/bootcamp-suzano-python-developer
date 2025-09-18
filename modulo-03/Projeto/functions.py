@@ -23,21 +23,18 @@ Com base na versão anterior do sistema bancário, adicione as seguintes funcion
     - Ao final, deve exibir o saldo atual da conta.
 """
 
-
 from datetime import date, time, datetime, timedelta, timezone
 
-dia_atual = date.today()
-limite_operacoes = 10
-operacoes_diarias = 0
-
-
-def mostrar_menu():
+def mostrar_menu(dia_atual, limite_operacoes, limite_diario):
     while True:
         print("\n============ SISTEMA BANCÁRIO ============")
+        print(f'Dia de hoje - {dia_atual.strftime("%d/%m/%Y")}')
         print("1 - Depositar")
         print("2 - Sacar")
         print("3 - Ver Extrato")
+        print("4 - Dormir (aumentar dia)")
         print("0 - Sair")
+        print(f'\nOperações diárias (Max. {limite_operacoes}): {limite_diario}')
         
         try:
             option = int(input('\nEscolha uma das opções acima: '))
@@ -45,17 +42,17 @@ def mostrar_menu():
             print("\nIsso não é um número válido!")
             continue
         
-        if option < 0 or option > 3:
+        if option < 0 or option > 4:
             print('\nNúmero inválido')
             continue
         
         return option
 
-def realizar_deposito(carteira, depositos_extrato, operacoes_diarias):
+def realizar_deposito(carteira, depositos_extrato, operacoes_diarias, limite_operacoes):
     while True:
         
         if operacoes_diarias >= limite_operacoes:
-            print('\nLimite de saques diários atingidos!')
+            print('\nO número de transações diárias foi excedido!')
             break
         
         try:
@@ -80,7 +77,7 @@ def realizar_saque(carteira, saques_extrato, operacoes_diarias, limite_operacoes
     while True:
         
         if operacoes_diarias >= limite_operacoes:
-            print('\nLimite de saques diários atingidos!')
+            print('\nO número de transações diárias foi excedido!')
             break
         
         try:
@@ -122,7 +119,8 @@ def consultar_extrato(depositos_extrato, saques_extrato, carteira):
 
     print(f'\nSaldo atual: R${carteira:.2f}')
 
-def aumentar_dia(dia_atual):
+def aumentar_dia(dia_atual, operacoes_diarias):
     dia_atual += timedelta(days=1)
+    operacoes_diarias = 0
     
-    return dia_atual
+    return dia_atual, operacoes_diarias

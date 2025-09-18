@@ -23,6 +23,7 @@ Com base na versão anterior do sistema bancário, adicione as seguintes funcion
     - Ao final, deve exibir o saldo atual da conta.
 """
 
+from datetime import date, time, datetime, timedelta, timezone
 import functions as func
 
 depositos_extrato = []
@@ -32,17 +33,20 @@ carteira = 0
 limite_operacoes = 10
 operacoes_diarias = 0
 
+dia_atual = date.today()
+
 while True:
-    option = func.mostrar_menu()
+    option = func.mostrar_menu(dia_atual, limite_operacoes, operacoes_diarias)
 
     match option:
         case 1:
-            carteira, depositos_extrato = func.realizar_deposito(carteira, depositos_extrato)
+            carteira, depositos_extrato, operacoes_diarias = func.realizar_deposito(carteira, depositos_extrato, operacoes_diarias, limite_operacoes)
         case 2:
             carteira, saques_extrato, operacoes_diarias = func.realizar_saque(carteira, saques_extrato, operacoes_diarias, limite_operacoes)
-            print(f'\nOperações diario {operacoes_diarias}')
         case 3:
             func.consultar_extrato(depositos_extrato, saques_extrato, carteira)
+        case 4:
+            dia_atual, operacoes_diarias = func.aumentar_dia(dia_atual, operacoes_diarias)
         case 0:
             print('\nSaindo ...')
             break
