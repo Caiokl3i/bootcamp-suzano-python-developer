@@ -26,7 +26,7 @@ Com base na versão anterior do sistema bancário, adicione as seguintes funcion
 
 from datetime import date, time, datetime, timedelta, timezone
 
-data_atual = datetime.now()
+dia_atual = date.today()
 limite_operacoes = 10
 operacoes_diarias = 0
 
@@ -122,3 +122,7 @@ def consultar_extrato(depositos_extrato, saques_extrato, carteira):
 
     print(f'\nSaldo atual: R${carteira:.2f}')
 
+def aumentar_dia(dia_atual):
+    dia_atual += timedelta(days=1)
+    
+    return dia_atual
