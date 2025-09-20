@@ -18,19 +18,7 @@ Com base na versão anterior do sistema bancário, adicione as seguintes funcion
         - Valor da operação
         - Data e hora da operação
     - Ao final, deve exibir o saldo atual da conta.
-    
-    
-    saques = [
-        {
-            data_saque: 10-12-2025 
-            valor: 500.00
-        },
-        {
-            data_saque: 10-12-2025 
-            valor: 500.00
-        },
-    ]
-    
+
 """
 
 from datetime import date, time, datetime, timedelta, timezone
@@ -123,13 +111,13 @@ def consultar_extrato(depositos, saques, carteira):
     print('\n=============== EXTRATO ===============\n')
     print('Depositos:')
     for deposito in depositos:
-        print(f'. R${deposito['valor']:.2f} - {deposito['data_deposito'].strftime("%d/%m/%Y")}')
+        print(f'. R${deposito['valor']:.2f} - {deposito['data_deposito'].strftime("%d/%m/%Y")} / {deposito['data_deposito'].hour}:{deposito['data_deposito'].minute}')
         total_depositos += deposito['valor']
     
     print()
     print('Saques:')
     for saque in saques:
-        print(f'. R${saque['valor']:.2f} - {saque['data_saque'].strftime("%d/%m/%Y")}')
+        print(f'. R${saque['valor']:.2f} - {saque['data_saque'].strftime("%d/%m/%Y")} / {saque['data_saque'].hour}:{saque['data_saque'].minute}')
         total_saques += saque['valor']
     
     print(f'\nTotal de depósitos: R${total_depositos:.2f}')
