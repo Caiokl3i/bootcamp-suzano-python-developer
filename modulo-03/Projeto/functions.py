@@ -130,3 +130,5 @@ def aumentar_dia(dia_atual, operacoes_diarias):
     operacoes_diarias = 0
     
     return dia_atual, operacoes_diarias
+
+# Pronto
