@@ -8,19 +8,29 @@ Com base na versão anterior do sistema bancário, adicione as seguintes funcion
     - Caso o usuário tente realizar uma transação após atingir o limite, o sistema deve exibir uma mensagem 
         informando que o número de transações diárias foi excedido.
 
-2. Controle de Saques (regras mantidas da versão 1)
-    - Continuam válidas as regras: máximo de 3 saques por dia e limite de R$ 500,00 por saque.
-
-3. Registro de Data e Hora
+2. Registro de Data e Hora
     - Cada transação (depósito ou saque) deve ser registrada com a data e hora exata em que foi realizada.
     - Essas informações devem aparecer no extrato ao lado de cada movimentação.
 
-4. Extrato Atualizado
+3. Extrato Atualizado
     - O extrato deve exibir, em ordem, todas as transações do dia, mostrando:
         - Tipo da operação (Depósito ou Saque)
         - Valor da operação
         - Data e hora da operação
     - Ao final, deve exibir o saldo atual da conta.
+    
+    
+    saques = [
+        {
+            data_saque: 10-12-2025 
+            valor: 500.00
+        },
+        {
+            data_saque: 10-12-2025 
+            valor: 500.00
+        },
+    ]
+    
 """
 
 from datetime import date, time, datetime, timedelta, timezone
@@ -48,7 +58,7 @@ def mostrar_menu(dia_atual, limite_operacoes, limite_diario):
         
         return option
 
-def realizar_deposito(carteira, depositos_extrato, operacoes_diarias, limite_operacoes):
+def realizar_deposito(carteira, depositos, operacoes_diarias, limite_operacoes, dia_atual):
     while True:
         
         if operacoes_diarias >= limite_operacoes:
@@ -67,13 +77,14 @@ def realizar_deposito(carteira, depositos_extrato, operacoes_diarias, limite_ope
         
         carteira += valor_deposito
         operacoes_diarias += 1
-        depositos_extrato.append(valor_deposito)
+        
+        depositos.append({'data_deposito': dia_atual, 'valor': valor_deposito})
         
         print(f'\nDeposito de R${valor_deposito:.2f} foi realizado com sucesso\n\nCarteira: R${carteira:.2f}')
         break
-    return carteira, depositos_extrato, operacoes_diarias
+    return carteira, depositos, operacoes_diarias
 
-def realizar_saque(carteira, saques_extrato, operacoes_diarias, limite_operacoes):
+def realizar_saque(carteira, saques, operacoes_diarias, limite_operacoes, dia_atual):
     while True:
         
         if operacoes_diarias >= limite_operacoes:
@@ -98,24 +109,31 @@ def realizar_saque(carteira, saques_extrato, operacoes_diarias, limite_operacoes
         
         carteira -= valor_saque
         operacoes_diarias += 1
-        saques_extrato.append(valor_saque)
+        
+        saques.append({'data_saque': dia_atual, 'valor': valor_saque})
         
         print(f'\nSaque de R${valor_saque:.2f} foi realizado com sucesso\n\nCarteira: R${carteira:.2f}')
         break
-    return carteira, saques_extrato, operacoes_diarias
+    return carteira, saques, operacoes_diarias
 
-def consultar_extrato(depositos_extrato, saques_extrato, carteira):
-    print('\n=============== EXTRATO ===============')
+def consultar_extrato(depositos, saques, carteira):
+    total_saques = 0
+    total_depositos = 0
     
-    for i, deposito in enumerate(depositos_extrato):
-        print(f'Deposito {i+1}: R${deposito:.2f}')
-
+    print('\n=============== EXTRATO ===============\n')
+    print('Depositos:')
+    for deposito in depositos:
+        print(f'. R${deposito['valor']:.2f} - {deposito['data_deposito'].strftime("%d/%m/%Y")}')
+        total_depositos += deposito['valor']
+    
     print()
-    for i, saque in enumerate(saques_extrato):
-        print(f'Saque {i+1}: R${saque:.2f}')
+    print('Saques:')
+    for saque in saques:
+        print(f'. R${saque['valor']:.2f} - {saque['data_saque'].strftime("%d/%m/%Y")}')
+        total_saques += saque['valor']
     
-    print(f'\nTotal de depósitos: R${sum(depositos_extrato):.2f}')
-    print(f'Total de saques: R${sum(saques_extrato):.2f}')
+    print(f'\nTotal de depósitos: R${total_depositos:.2f}')
+    print(f'Total de saques: R${total_saques:.2f}')
 
     print(f'\nSaldo atual: R${carteira:.2f}')
 
