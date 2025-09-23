@@ -35,6 +35,7 @@ Resumo das Funcionalidades:
     - Visualizar Extrato
     - Criar Usuário
     - Criar Conta Corrente
+
 """
 
 from datetime import date, time, datetime, timedelta, timezone
@@ -47,6 +48,9 @@ def mostrar_menu(dia_atual, limite_operacoes, limite_diario):
         print("2 - Sacar")
         print("3 - Ver Extrato")
         print("4 - Dormir (aumentar dia)")
+        print("5 - Cadastrar usuário")
+        print("6 - Criar conta")
+        print("7 - Visualisar contas")
         print("0 - Sair")
         print(f'\nOperações diárias (Max. {limite_operacoes}): {limite_diario}')
         
@@ -56,7 +60,7 @@ def mostrar_menu(dia_atual, limite_operacoes, limite_diario):
             print("\nIsso não é um número válido!")
             continue
         
-        if option < 0 or option > 4:
+        if option < 0 or option > 7:
             print('\nNúmero inválido')
             continue
         
@@ -147,4 +151,133 @@ def aumentar_dia(dia_atual, operacoes_diarias):
     
     return dia_atual, operacoes_diarias
 
-# Pronto
+def cadastrar_usuario(usuarios):
+    
+    cpf_filtrados = [usuario['cpf'] for usuario in usuarios]
+    
+    while True:
+        cpf = input('Digite seu CPF: ')
+        if not verificar_cpf(cpf):
+            print('CPF inválido!')
+        else:
+            break
+    
+    if cpf in cpf_filtrados:
+        print('Este CPF já está cadastrado! Faça o login')
+        return 
+    
+    while True:
+        nome = input('Digite seu nome completo: ')
+
+        if not verificar_nome(nome):
+            print('Nome inválido')
+        else:
+            break
+    
+    while True:
+        data_nasc = input('Digite sua data de nascimento (DD-MM-AAAA): ')
+        
+        if not verificar_data_nasc(data_nasc):
+            print('Data de nascimento inválida')
+        else:
+            break
+    
+    print('\nDigite seu endereço:')
+    while True:
+        endereco = input('Digite o seu endereço (logradouro, n° - bairro - cidade/sigla estado): ')
+        
+        if not endereco.strip():
+            print('Endereço não pode estar vazio')
+        else:
+            break
+    
+    usuarios.append(
+        {
+            'cpf': cpf,
+            'nome': nome,
+            'data_nasc': data_nasc,
+            'endereco': endereco
+        }
+    )
+    
+    print('Usuário cadastrado com sucesso!!')
+    return usuarios
+
+def verificar_cpf(cpf):
+    if not cpf.isdigit():
+        return False
+    
+    if len(cpf) != 11:
+        return False
+    
+    return True
+
+def verificar_nome(nome):
+    if not nome:
+        return False
+    
+    nome = nome.strip()
+    
+    for char in nome:
+        if char.isdigit():
+            return False
+    
+    return True
+
+def verificar_data_nasc(data):
+    data_atual = datetime.now()
+    try:
+        data_convertida = datetime.strptime(data, '%d-%m-%Y')
+    except ValueError:
+        return False
+    
+    if data_convertida > data_atual:
+        return False
+    
+    return True
+
+def criar_conta(contas, usuarios):
+    
+    if not usuarios:
+        print('!! Ainda não há usuários cadastrados !!')
+        return
+    
+    AGENCIA = '0001'
+    conta = len(contas) + 1
+    
+    while True:
+        cpf_vincular = input('Digite o CPF para vincular o usuário: ')
+        
+        if not verificar_cpf(cpf_vincular):
+            print('CPF inválido!')
+        else:
+            break
+    
+    contas.append(
+        {
+            'agencia': AGENCIA,
+            'conta': conta,
+            'cpf_titular': cpf_vincular
+        }
+    )
+    
+    print('Conta criada com sucesso!!')
+    return contas
+
+def visualizar_contas(contas, usuarios):
+    
+    print('================= CONTAS =================')
+    for conta in contas:
+        nome_titular = ''
+        for usuario in usuarios:
+            if usuario['cpf'] == conta['cpf_titular']:
+                nome_titular = usuario['nome']
+                break
+            
+        print(f'{'Conta:':<15} {conta['conta']}')
+        print(f'{'C/C:':<15} {conta['agencia']}')
+        print(f'{'Titular:':<15} {nome_titular}')
+        print('===========================================')
+
+
+# pronto

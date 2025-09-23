@@ -35,11 +35,13 @@ Resumo das Funcionalidades:
     - Visualizar Extrato
     - Criar Usuário
     - Criar Conta Corrente
+    
 """
 
 from datetime import date, time, datetime, timedelta, timezone
 import functions as func
 import time
+
 
 depositos_extrato = []
 saques_extrato = []
@@ -49,6 +51,9 @@ limite_operacoes = 10
 operacoes_diarias = 0
 
 dia_atual = datetime.now()
+
+usuarios = []
+contas = []
 
 
 while True:
@@ -64,6 +69,14 @@ while True:
             func.consultar_extrato(depositos_extrato, saques_extrato, carteira)
         case 4:
             dia_atual, operacoes_diarias = func.aumentar_dia(dia_atual, operacoes_diarias)
+        case 5:
+            usuarios = func.cadastrar_usuario(usuarios)
+        case 6:
+            contas = func.criar_conta(contas, usuarios)
+        case 7:
+            func.visualizar_contas(contas, usuarios)
         case 0:
             print('\nSaindo ...')
             break
+
+# pronto
