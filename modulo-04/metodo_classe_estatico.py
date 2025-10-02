@@ -4,6 +4,9 @@ class Pessoa:
         self.idade = idade
 
     @classmethod
+    # O @classmethod é usado quando você quer criar (ou manipular) uma instância
+    # da própria classe dentro do método, sem precisar de uma instância já existente.
+    # Ele funciona como uma “fábrica” que sabe criar objetos da classe.
     def criar_de_data_nasc(cls, ano, nome):
         idade = 2022 - ano
         return cls(nome, idade)
