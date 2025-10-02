@@ -14,7 +14,7 @@ setup(
     description="Pacote simples para conversão de unidades (comprimento e temperatura).",
     long_description=page_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/seu_usuario/conversor-unidades",
+    url="https://github.com/Caiokl3i/bootcamp-suzano-python-developer/tree/master/conversor_unidades",
     packages=find_packages(),
     install_requires=requirements,
     python_requires='>=3.8',
