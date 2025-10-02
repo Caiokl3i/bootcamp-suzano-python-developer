@@ -8,7 +8,7 @@ with open("requirements.txt") as f:
 
 setup(
     name="conversor_unidades",
-    version="0.0.1",
+    version="0.0.2",
     author="Caio Victor Santos Valentim",
     author_email="caio.victor.santos12@gmail.com",
     description="Pacote simples para conversão de unidades (comprimento e temperatura).",
